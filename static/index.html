@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>PixScale | Neural Engine</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-high": "#2a2a2a",
+                        "outline-variant": "#444748",
+                        "primary-container": "#727272",
+                        "secondary-container": "#484949",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#c4c7c7",
+                        "on-primary-container": "#faf8f8",
+                        "secondary": "#c6c6c6",
+                        "surface-container": "#201f1f",
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#131313] text-[#e5e2e1] min-h-screen flex flex-col font-body-md antialiased">
+    
+    <header class="w-full bg-zinc-950 border-b-[1px] border-zinc-800 z-50 relative">
+        <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto">
+            <span class="text-xl font-black tracking-tighter text-zinc-100 uppercase">PIXSCALE</span>
+            <button class="font-['Inter'] uppercase tracking-widest text-xs font-bold text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 px-4 py-2 border border-zinc-800 rounded">
+                v1.0.0
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-[1440px] mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <section class="lg:col-span-8 w-full flex flex-col gap-6">
+            <div class="w-full aspect-[16/10] bg-surface-container-high border border-t-secondary border-b-surface-container-lowest border-x-surface-container relative rounded shadow-2xl p-2">
+                
+                <div class="w-full h-full relative overflow-hidden bg-[#0e0e0e] border border-outline-variant rounded-sm select-none" id="slider-container">
+                    
+                    <img id="after-img" class="absolute inset-0 w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Upscaled Result">
+                    
+                    <img id="before-img" class="absolute inset-0 w-full h-full object-cover border-r-2 border-primary-container z-10" style="clip-path: inset(0 50% 0 0);" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Original Input">
+                    
+                        <div id="slider-handle" class="absolute inset-y-0 left-1/2 w-0.5 bg-primary-container z-20 shadow-[0_0_8px_rgba(184,184,184,0.5)] transform -translate-x-1/2 flex items-center justify-center cursor-ew-resize">
+                             <div class="w-8 h-12 bg-gradient-to-b from-primary-container to-secondary-container border border-t-secondary border-b-surface-container-lowest border-x-outline-variant rounded flex items-center justify-center shadow-lg pointer-events-none">
+                                <span class="material-symbols-outlined text-[18px] text-surface-container-lowest leading-none -mr-1" data-weight="fill">chevron_left</span>
+                                <span class="material-symbols-outlined text-[18px] text-surface-container-lowest leading-none -ml-1" data-weight="fill">chevron_right</span>
+                            </div>
+                        </div>
+
+                    <div class="absolute bottom-4 left-4 z-20 bg-surface-container/90 border border-outline-variant px-3 py-1 text-[12px] font-bold text-on-surface tracking-[0.1em] uppercase rounded-sm">
+                        Input
+                    </div>
+                    <div class="absolute bottom-4 right-4 z-20 bg-surface-container/90 border border-outline-variant px-3 py-1 text-[12px] font-bold text-on-surface tracking-[0.1em] uppercase rounded-sm">
+                        Output
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-outline-variant">
+                <span class="material-symbols-outlined">info</span>
+                <p class="text-on-surface-variant text-sm">Upload an image. Drag the slider to compare original resolution with AI output.</p>
+            </div>
+        </section>
+
+        <aside class="lg:col-span-4 w-full">
+            <div class="bg-surface-container-high brushed-metal border border-t-secondary border-b-surface-container-lowest border-x-surface-container p-6 flex flex-col gap-8 rounded shadow-xl relative overflow-hidden">
+                
+                <div class="absolute top-2 left-2 w-1.5 h-1.5 rounded-full bg-surface-container-lowest border border-outline-variant"></div>
+                <div class="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-surface-container-lowest border border-outline-variant"></div>
+                <div class="absolute bottom-2 left-2 w-1.5 h-1.5 rounded-full bg-surface-container-lowest border border-outline-variant"></div>
+                <div class="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-surface-container-lowest border border-outline-variant"></div>
+                
+                <div>
+                    <h2 class="text-2xl font-semibold text-on-surface mb-1">Parameters</h2>
+                    <div class="h-px w-full bg-outline-variant mt-2 mb-4"></div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-[12px] font-bold text-on-surface-variant uppercase flex justify-between items-center tracking-[0.1em]">
+                        Scale Factor
+                        <span class="text-primary-container">SYS_VAR_01</span>
+                    </label>
+                    <div class="relative">
+                        <input type="text" disabled value="4x Neural Resolution" class="w-full bg-surface-container-lowest border-0 border-b border-b-primary-container text-on-surface p-4 pr-12 text-lg opacity-80 cursor-not-allowed">
+                        <span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-primary-container pointer-events-none">lock</span>
+                    </div>
+                </div>
+
+                <div class="flex-grow min-h-[48px]"></div>
+
+                <input type="file" id="file-input" accept="image/*" class="hidden">
+                <button id="upload-btn" class="w-full bg-gradient-to-b from-primary-container to-secondary-container border border-t-secondary border-b-surface-container-lowest border-x-outline-variant text-on-primary-container text-[12px] font-bold py-5 px-6 rounded shadow-lg hover:border-t-white transition-all flex justify-center items-center gap-3 uppercase tracking-[0.1em]">
+                    <span id="btn-icon" class="material-symbols-outlined text-[20px]" data-weight="fill">upload</span>
+                    <span id="btn-text">Upload Image</span>
+                </button>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="bg-zinc-950 border-t-[1px] border-zinc-900 w-full mt-auto">
+        <div class="flex justify-between items-center w-full px-8 py-4 max-w-[1440px] mx-auto uppercase tracking-[0.2em] text-[10px] font-medium text-zinc-500">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_5px_rgba(16,185,129,0.5)]"></div>
+                CORE: STANDBY
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
