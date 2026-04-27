@@ -1,0 +1,32 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Industrial Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0e0e0e; }
+::-webkit-scrollbar-thumb { background: #444748; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #727272; }
+
+/* Brushed Metal Overlay */
+.brushed-metal {
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.02) 0px,
+        rgba(255, 255, 255, 0.02) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+/* Hardware pulsing for active processing */
+.system-processing {
+    animation: pulse-metal 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+@keyframes pulse-metal {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+}
