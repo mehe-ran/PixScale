@@ -4,7 +4,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from PIL import Image, ImageFilter # <-- Added ImageFilter here
+from PIL import Image
 import torchvision.transforms as transforms
 from model import CompactSRResNet
 
@@ -57,12 +57,6 @@ async def upscale_image(file: UploadFile = File(...)):
     # postprocess: clamp to ensure valid pixels and convert back
     output_tensor = output_tensor.squeeze(0).clamp(0, 1)
     output_img = transforms.ToPILImage()(output_tensor)
-
-    # 1. Kill the color static
-    output_img = output_img.filter(ImageFilter.MedianFilter(size=3))
-    # 2. Sharpen the edges
-    output_img = output_img.filter(ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3))
-    # ---------------------------
 
     # save to byte stream for http response
     img_byte_arr = io.BytesIO()
