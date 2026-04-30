@@ -6,3 +6,4 @@ data/
 .idea/test_*.py
 upscale.py
 result_*.jpg
+.idea/
