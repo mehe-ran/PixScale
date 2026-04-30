@@ -42,4 +42,4 @@ class HighResDataset(Dataset):
         lr_image = self.lr_transform(hr_image)
 
         # Standard [0, 1] pixel values. No negative math.
-        return lr_image, hr_image
+        return lr_image, hr_image# clean tensor format
