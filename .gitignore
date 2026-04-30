@@ -3,4 +3,6 @@ __pycache__/
 data/
 *.pth
 .DS_Store
-.idea/
+.idea/test_*.py
+upscale.py
+result_*.jpg
