@@ -22,3 +22,7 @@ Ensure you have Python 3.x installed and a virtual environment active.
 2. Run the inference server:
    `uvicorn main:app --reload`
 3. Access the web interface at `http://127.0.0.1:8000`
+
+## Roadmap
+* **Memory Optimization:** Implement batch size reduction and explicit MPS cache clearing in the training loop to prevent swap memory overflow on Apple Silicon.
+* **Full Dataset Training:** Run the optimized `train.py` loop across the complete 12GB high resolution archive.
